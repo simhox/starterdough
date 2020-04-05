@@ -1,8 +1,14 @@
+//IMPL SHO: get Template and adapt. 
+//IMPL SHO: create wsiwyg editor to add post
+//IMPL SHO: further explore boilerplate
+
+
+
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
 const logger = require('./logger');
-
+const fileLogger = require('./fileLogger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
@@ -16,6 +22,13 @@ const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+app.use('/', function (req, res, next) {
+  //IMPL SHO: make it work. to do enable debugging
+  fileLogger.logRequestIps(req);
+  next();
+});
+
+
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
@@ -28,12 +41,20 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
+
+
+
+
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
   req.url = req.url + '.gz'; // eslint-disable-line
   res.set('Content-Encoding', 'gzip');
+
   next();
 });
+
+
+
 
 // Start your app.
 app.listen(port, host, async err => {
@@ -50,7 +71,13 @@ app.listen(port, host, async err => {
       return logger.error(e);
     }
     logger.appStarted(port, prettyHost, url);
+
   } else {
     logger.appStarted(port, prettyHost);
+
   }
 });
+
+
+
+

@@ -16,11 +16,13 @@ import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import '../../../stylesheets/style.scss';
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
+  max-width: 2500px;
   margin: 0 auto;
   display: flex;
   min-height: 100%;
@@ -32,10 +34,10 @@ export default function App() {
   return (
     <AppWrapper>
       <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
+        titleTemplate="Adult Hell"
+        defaultTitle="Adult Hell"
       >
-        <meta name="description" content="A React.js Boilerplate application" />
+        <meta name="description" content="Adult Hell" />
       </Helmet>
       <Header />
       <Switch>

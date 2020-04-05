@@ -1,0 +1,7 @@
+$error-color: red;
+
+.danger {
+  background-color: $error-color;
+}
+
+module.exports = Button;
